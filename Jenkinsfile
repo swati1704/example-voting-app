@@ -33,24 +33,21 @@ aws ecs update-service --cluster ${ECS_CLUSTER} \
 
       }
     }	
+  }
 	
-	}
-	
-	environment {
+  environment {
      AWS_DEFAULT_REGION = 'us-east-1'
      SERVICE_NAME = 'vote'
      TASK_FAMILY = 'vote-fargate-v1'
      ECS_CLUSTER = 'vote-application'
-  }
-  
-    post {
+   }
+  post {
       always {
         deleteDir()
         sh 'sudo docker rmi 889521077131.dkr.ecr.us-east-1.amazonaws.com/ciimagerepo:v${BUILD_NUMBER}'
        }
-
     }
-    options {
+  options {
     buildDiscarder(logRotator(numToKeepStr: '10'))
     disableConcurrentBuilds()
     timeout(time: 1, unit: 'HOURS')
