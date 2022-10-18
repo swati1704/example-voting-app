@@ -44,7 +44,7 @@ aws ecs update-service --cluster ${ECS_CLUSTER} \
   post {
       always {
         deleteDir()
-        sh 'sudo docker rmi 889521077131.dkr.ecr.us-east-1.amazonaws.com/ciimagerepo:v${BUILD_NUMBER}'
+        sh 'docker rmi 889521077131.dkr.ecr.us-east-1.amazonaws.com/ciimagerepo:v${BUILD_NUMBER}'
        }
     }
   options {
